@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+# 1-square.py by Harry Muriithi
+""" Module that deines a square """
+
+
 class Square:
     """
     Class that represents a square
