@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+# 2-square.py by Harry Murrithi
+""" Module that defines a square """
+
+
 class Square:
     """
     Class that represents a square
@@ -19,3 +23,12 @@ class Square:
         if size < 0:
             raise ValueError("size must be >= 0")
         self.__size = size
+
+    def area(self):
+        """
+        calculates the area of the square
+
+        Returns:
+            square of the size
+        """
+        return self.__size ** 2
