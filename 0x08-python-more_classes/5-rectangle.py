@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# 2-rectangle.py by Harry Muriithi
+# 5-rectangle.py by Harry Muriithi
 """ Module that defines a rectangle """
 
 
@@ -56,3 +56,20 @@ class Rectangle:
     def perimeter(self):
         """ Calculate and return the perimeter of the rectangle """
         return 2 * (self.__width + self.__height)
+
+    def __str__(self):
+        """Return a string representation of the rectangle."""
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        rectangle = ""
+        for _ in range(self.__height):
+            rectangle += "#" * self.__width + "\n"
+        return rectangle[:-1]
+
+    def __repr__(self):
+        """ Return a string representation of the rectangle object """
+        return "Rectangle({}, {})".format(self.__width, self.__height)
+
+    def __del__(self):
+        """ Print a message when an instance of Rectangle is deleted """
+        print("Bye rectangle...")

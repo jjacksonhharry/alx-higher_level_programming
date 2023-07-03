@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# 2-rectangle.py by Harry Muriithi
+# 4-rectangle.py by Harry Muriithi
 """ Module that defines a rectangle """
 
 
@@ -67,5 +67,5 @@ class Rectangle:
         return rectangle[:-1]
 
     def __repr__(self):
-        """Return a string representation of the rectangle object."""
+        """ Return a string representation of the rectangle object """
         return "Rectangle({}, {})".format(self.__width, self.__height)
