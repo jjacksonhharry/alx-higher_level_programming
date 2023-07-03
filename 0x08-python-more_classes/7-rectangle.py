@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# 6-rectangle.py by Harry Muriithi
+# 7-rectangle.py by Harry Muriithi
 """ Module that defines a rectangle """
 
 
@@ -7,6 +7,7 @@ class Rectangle:
     """ Class representing a rectangle """
 
     number_of_instances = 0
+    print_symbol = "#"
 
     def __init__(self, width=0, height=0):
         """
@@ -66,7 +67,7 @@ class Rectangle:
             return ""
         rectangle = ""
         for _ in range(self.__height):
-            rectangle += "#" * self.__width + "\n"
+            rectangle += str(self.print_symbol) * self.__width + "\n"
         return rectangle[:-1]
 
     def __repr__(self):
