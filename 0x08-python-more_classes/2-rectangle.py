@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# 1-rectangle.py by Harry Muriithi
+# 2-rectangle.py by Harry Muriithi
 """ Module that defines a rectangle """
 
 
@@ -11,8 +11,8 @@ class Rectangle:
         Initializes the rectangle class
 
         Args:
-            height: representing the height of the rectangle
             width: representing the width of the rectangle
+            height: representing the height of the rectangle
 
         Raises:
             TypeError: if size is not an integer

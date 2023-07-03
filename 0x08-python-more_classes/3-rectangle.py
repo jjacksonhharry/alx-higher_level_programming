@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# 1-rectangle.py by Harry Muriithi
+# 3-rectangle.py by Harry Muriithi
 """ Module that defines a rectangle """
 
 
@@ -48,3 +48,23 @@ class Rectangle:
         if value < 0:
             raise ValueError("width must be >= 0")
         self.__height = value
+
+    def area(self):
+        """ Calculate and return the area of the rectangle """
+        return self.__width * self.__height
+
+    def perimeter(self):
+        """ Calculate and return the perimeter of the rectangle """
+        return 2 * (self.__width + self.__height)
+
+    def __str__(self):
+        """Return a string representation of the rectangle."""
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        rectangle = ""
+        for column in range(self.__height):
+            for row in range(self.__width):
+                rectangle += "#"
+            if column < self.__height - 1:
+                rectangle += "\n"
+            return rectangle
