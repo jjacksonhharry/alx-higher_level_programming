@@ -6,7 +6,7 @@
  */
 void print_python_string(PyObject *p)
 {
-	PyUnicodeObject *s = (PyUnicodeObject *)p;
+	PyObject* s = p;
 	Py_ssize_t len;
 
 	if (!PyUnicode_Check(s))
@@ -14,6 +14,7 @@ void print_python_string(PyObject *p)
 		printf("  [ERROR] Invalid String Object\n");
 		return;
 	}
+
 	len = PyUnicode_GET_LENGTH(s);
 
 	printf("  [.] %ls\n", PyUnicode_AsWideCharString(s, &len));
