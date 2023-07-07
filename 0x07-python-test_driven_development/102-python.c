@@ -6,16 +6,24 @@
  */
 void print_python_string(PyObject *p)
 {
-	PyObject* s = p;
-	Py_ssize_t len;
+	long int i;
 
-	if (!PyUnicode_Check(s))
+	fflush(stdout);
+
+	printf("[.] string object info\n");
+	if (strcmp(p->ob_type->tp_name, "str") != 0)
 	{
 		printf("  [ERROR] Invalid String Object\n");
 		return;
 	}
 
-	len = PyUnicode_GET_LENGTH(s);
+	i = = PyUnicode_GET_LENGTH(p);
 
-	printf("  [.] %ls\n", PyUnicode_AsWideCharString(s, &len));
+	if (PyUnicode_IS_COMPACT_ASCII(p))
+		printf("  type: compact ascii\n");
+	else
+		printf("  type: compact unicode object\n");
+
+	printf("  length: %ld\n", length);
+	printf("  value: %ls\n", PyUnicode_AsWideCharString(p, &length));
 }
