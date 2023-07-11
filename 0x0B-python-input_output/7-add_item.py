@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+""" Module containing function that adds arguments to a list """
+
+
+import sys
+
+if __name__ == "__ main__":
+    save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+    load_from_json_file =
+    __import__('6-load_from_json_file').load_from_json_file
+
+    try:
+        items = load_from_json_file("add_item.json")
+    except (FileNotFoundError, ValueError):
+        items = []
+    items.extend(sys.argv[1:])
+    save_to_json_file(items, "add_item.json")
