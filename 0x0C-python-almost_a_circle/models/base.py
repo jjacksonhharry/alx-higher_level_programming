@@ -74,13 +74,10 @@ class Base:
         """
         filename = cls.__name__ + ".json"
         try:
-            with open(filename, mode="r", encoding="utf-8") as file:
-                data = file.read()
-                if data:
-                    instance_list = cls.from_json_string(data)
-                    return [cls.create(**obj_dict) for obj_dict in instance_list]
-                else:
-                    return []
+            with open(filename, 'r') as file:
+                json_string = file.read()
+                list_dicts = cls.from_json_string(json_string)
+                return [cls.create(**dict) for dict in list_dicts]
         except FileNotFoundError:
             return []
 
