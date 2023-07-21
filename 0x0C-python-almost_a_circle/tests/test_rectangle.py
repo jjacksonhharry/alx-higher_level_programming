@@ -2,6 +2,7 @@ import unittest
 import os
 import io
 import sys
+from contextlib import redirect_stdout
 
 from models.rectangle import Rectangle
 from models.base import Base
@@ -23,6 +24,108 @@ class TestRectangle(unittest.TestCase):
         r2 = Rectangle(2, 5)
         self.assertTrue(type(r1) == type(r2))
         self.assertFalse(id(r1) == id(r2))
+
+    def test_invalid_args(self):
+        """Check if the Rectangle constructor handles invalid arguments"""
+        with self.assertRaises(ValueError):
+            """Negative width"""
+            r = Rectangle(-1, 2)
+
+        with self.assertRaises(ValueError):
+            """height"""
+            r = Rectangle(1, -2)
+
+        with self.assertRaises(ValueError):
+            """Zero width"""
+            r = Rectangle(0, 2)
+
+        with self.assertRaises(ValueError):
+            """Zero height"""
+            r = Rectangle(1, 0)
+
+        with self.assertRaises(ValueError):
+            """Negative x coordinate"""
+            r = Rectangle(1, 2, -3)
+
+        with self.assertRaises(ValueError):
+            """Negative y coordinate"""
+            r = Rectangle(1, 2, 3, -4)
+
+    def test_invalid_type_args(self):
+        """Check if the Rectangle constructor handles invalid type arguments"""
+        with self.assertRaises(TypeError):
+            """Width as a string"""
+            r = Rectangle("1", 2)
+
+        with self.assertRaises(TypeError):
+            """Height as a string"""
+            r = Rectangle(1, "2")
+
+        with self.assertRaises(TypeError):
+            """X coordinate as a string"""
+            r = Rectangle(1, 2, "3")
+
+        with self.assertRaises(TypeError):
+            """Y coordinate as a string"""
+            r = Rectangle(1, 2, 3, "4")
+
+        with self.assertRaises(TypeError):
+            """Width as a float"""
+            r = Rectangle(1.5, 2)
+
+        with self.assertRaises(TypeError):
+            """Height as a float"""
+            r = Rectangle(1, 2.5)
+
+        with self.assertRaises(TypeError):
+            """X coordinate as a float"""
+            r = Rectangle(1, 2, 3.5)
+
+        with self.assertRaises(TypeError):
+            """Y coordinate as a float"""
+            r = Rectangle(1, 2, 3, 4.5)
+
+    def test_display_without_y(self):
+        """Check if the display method works without y coordinate"""
+        r = Rectangle(4, 3, 2)
+        expected_output = "  ####\n" \
+                          "  ####\n" \
+                          "  ####\n"
+        with io.StringIO() as buffer, redirect_stdout(buffer):
+            r.display()
+            output = buffer.getvalue()
+            self.assertEqual(output, expected_output)
+
+    def test_display(self):
+        """Check if the display method works with all parameters"""
+        r = Rectangle(4, 3, 2, 1)
+        expected_output = "\n" \
+                          "  ####\n" \
+                          "  ####\n" \
+                          "  ####\n"
+        with io.StringIO() as buffer, redirect_stdout(buffer):
+            r.display()
+            output = buffer.getvalue()
+            self.assertEqual(output, expected_output)
+
+    def test_save_to_file_none(self):
+        """Check if save_to_file method works with None argument"""
+        """Call the save_to_file method with None"""
+        Rectangle.save_to_file(None)
+
+        """Verify if the file with the correct name exists"""
+        filename = "Rectangle.json"
+        self.assertTrue(os.path.exists(filename))
+
+        """Read the content of the file"""
+        with open(filename, "r") as file:
+            content = file.read()
+
+        """Verify if the content is an empty list JSON representation"""
+        self.assertEqual(content, "[]")
+
+        """Remove the file after the test"""
+        os.remove(filename)
 
     def test_area(self):
         """Check area method of rectangle objects

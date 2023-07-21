@@ -37,6 +37,42 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(ValueError):
             s1.size = -5
 
+    def test_invalid_args(self):
+        """Check if the Square constructor handles invalid arguments"""
+        with self.assertRaises(ValueError):
+            """Negative size"""
+            s = Square(-1)
+
+        with self.assertRaises(ValueError):
+            """Zero size"""
+            s = Square(0)
+
+    def test_invalid_type_args(self):
+        """Check if the Square constructor handles invalid type arguments"""
+        with self.assertRaises(TypeError):
+            """Size as a string"""
+            s = Square("1")
+
+        with self.assertRaises(TypeError):
+            """x coordinate as a string"""
+            s = Square(1, "2")
+
+        with self.assertRaises(TypeError):
+            """y coordinate as a string"""
+            s = Square(1, 2, "3")
+
+        with self.assertRaises(TypeError):
+            """Size as a float"""
+            s = Square(1.5)
+
+        with self.assertRaises(TypeError):
+            """x coordinate as a float"""
+            s = Square(1, 2.5)
+
+        with self.assertRaises(TypeError):
+            """y coordinate as a float"""
+            s = Square(1, 2, 3.5)
+
     def test_square_area(self):
         """Test area method"""
         s1 = Square(5)
@@ -70,6 +106,33 @@ class TestSquare(unittest.TestCase):
         expected_dict = {'id': 1, 'size': 5, 'x': 2, 'y': 1}
         self.assertEqual(s1.to_dictionary(), expected_dict)
 
+    def test_create(self):
+        """Test the create method"""
+        square_dict = {'id': 89, 'size': 1, 'x': 2, 'y': 3}
+        s = Square.create(**square_dict)
+        self.assertIsInstance(s, Square)
+        self.assertEqual(s.id, 89)
+        self.assertEqual(s.size, 1)
+        self.assertEqual(s.x, 2)
+        self.assertEqual(s.y, 3)
+
+    def test_save_to_file(self):
+        """Test the save_to_file method"""
+        """Save an empty list of Square objects"""
+        Square.save_to_file([])
+
+        filename = "Square.json"
+        self.assertTrue(os.path.exists(filename))
+
+        """Read the content of the file"""
+        with open(filename, "r") as file:
+            content = file.read()
+
+        """Verify if the content is an empty list JSON representation"""
+        self.assertEqual(content, "[]")
+
+        """Remove the file after the test"""
+        os.remove(filename)
 
 if __name__ == "__main__":
     unittest.main()
