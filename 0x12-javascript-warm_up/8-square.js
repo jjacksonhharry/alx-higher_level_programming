@@ -1,6 +1,5 @@
 #!/usr/bin/node
 
-
 const size = parseInt(process.argv[2]);
 
 if (!isNaN(size) && size > 0) {
@@ -12,5 +11,5 @@ if (!isNaN(size) && size > 0) {
     console.log(row);
   }
 } else {
-  console.log("Missing size");
+  console.log('Missing size');
 }

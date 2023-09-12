@@ -1,7 +1,6 @@
 #!/usr/bin/node
 
-
-function add(a, b) {
+function add (a, b) {
   return a + b;
 }
 
@@ -12,5 +11,5 @@ if (!isNaN(num1) && !isNaN(num2)) {
   const result = add(num1, num2);
   console.log(result);
 } else {
-  console.log("NaN");
+  console.log('NaN');
 }
