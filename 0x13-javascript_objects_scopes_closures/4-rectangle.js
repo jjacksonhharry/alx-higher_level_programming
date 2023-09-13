@@ -25,5 +25,4 @@ class Rectangle {
      this.width = this.width * 2;
    }
 };
-
 module.exports= Rectangle;
