@@ -14,19 +14,22 @@ if __name__ == "__main__":
     """
     Access the database
     """
+    if len(sys.argv) != 4:
+        print("Usage: {} <DB_USER> <DB_PASSWORD> <DB_NAME>".format(sys.argv[0]))
+        sys.exit(1)
 
-    db_url = ("mysql+mysqldb://{}:{}@localhost:3306/{}".format(
-        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    db_user, db_password, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
 
-    engine = create_engine(db_url)
-    Base.metadata.create_all(engine)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(db_user, db_password, db_name))
+
     Session = sessionmaker(bind=engine)
-
     session = Session()
 
-    st = session.query(State).outerjoin(City).order_by(State.id, City.id).all()
+    states = session.query(State).order_by(State.id).all()
 
-    for state in st:
+    for state in states:
         print("{}: {}".format(state.id, state.name))
         for city in state.cities:
-            print("    {}: {}".format(city.id, city.name))
+            print("\t{}: {}".format(city.id, city.name))
+
+    session.close()
