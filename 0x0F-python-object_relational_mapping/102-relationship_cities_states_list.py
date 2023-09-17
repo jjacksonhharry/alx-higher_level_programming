@@ -23,7 +23,7 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
 
     session = Session()
-    
+
     stat = session.query(State).join(City).order_by(City.id).all()
 
     for state in stat:
