@@ -15,8 +15,9 @@ if __name__ == '__main__':
                             user=argv[1], passwd=argv[2], db=argv[3])
 
     with db_connect.cursor() as db_cursor:
-        db_cursor.execute("SELECT cities.id, cities.name, states.name FROM cities \
-                    JOIN states ON cities.state_id = states.id ORDER BY cities.id ASC")
+        db_cursor.execute("SELECT cities.id, cities.name, states.name \
+                FROM cities JOIN states ON cities.state_id = states.id \
+                ORDER BY cities.id ASC")
 
         rows_selected = db_cursor.fetchall()
 
