@@ -4,7 +4,7 @@ write a script that takes in arguments and displays all values
 in the states table of hbtn_0e_0_usa where name matches the argument
 """
 
-import MySQLdb
+import MySQLdb as db
 from sys import argv
 
 if __name__ == '__main__':
