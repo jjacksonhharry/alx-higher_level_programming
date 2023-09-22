@@ -20,10 +20,10 @@ if __name__ == "__main__":
     engine = create_engine(db_url)
     Session = sessionmaker(bind=engine)
 
-    state_to_update = session.query(State).filter(State.id == 2).first()
+    session = Session()
 
-    if state_to_update:
-        state_to_update.name = "New Mexico"
-        session.commit()
+    state = session.query(State).filter(State.id == 2).first()
+    state.name = "New Mexico"
+    session.commit()
 
     session.close()
