@@ -10,8 +10,8 @@ if __name__ == '__main__':
     """
     Access the database
     """
-    db_connect = MySQLdb.connect(
-        host="localhost", user=argv[1], port=3306, passwd=argv[2], db=argv[3])
+    db_connect = MySQLdb.connect(host="localhost", port=3306,
+                                 user=argv[1], passwd=argv[2], db=argv[3])
 
     with db_connect.cursor() as db_cursor:
         db_cursor.execute("SELECT cities.id, cities.name FROM cities"
@@ -23,4 +23,4 @@ if __name__ == '__main__':
 
     if rows_selected is not None:
         for row in rows_selected:
-            print(row)
+            print(", ".join([row[1] for row in rows_selected]))
