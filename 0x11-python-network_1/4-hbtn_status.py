@@ -3,6 +3,7 @@
 Python script that fetches https://alx-intranet.hbtn.io/status
 """
 import requests
+url = 'https://alx-intranet.hbtn.io/status'
 
 
 if __name__ == "__main__":
