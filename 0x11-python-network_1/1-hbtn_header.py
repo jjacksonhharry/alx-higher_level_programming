@@ -8,21 +8,11 @@ from sys import argv
 
 
 def main():
-    if len(argv) != 2:
-        print("Usage: {} <URL>".format(argv[0]))
-        return
-
-    url = argv[1]
-    try:
-        with urllib.request.urlopen(url) as response:
-            x_request_id = response.getheader('X-Request-Id')
-            if x_request_id:
-                print(x_request_id)
-            else:
-                print("X-Request-Id not found in the response headers.")
-    except urllib.error.URLError as e:
-        print("Error:", e.reason)
+    url = argv
+    with urllib.request.urlopen(url) as response:
+        headers = response.info()
+        print(headers['X-Request-Id'])
 
 
 if __name__ == "__main__":
-    main()
+    main(argv[1])
