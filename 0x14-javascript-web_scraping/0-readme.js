@@ -2,10 +2,12 @@
 # script that reads and prints the content of a file.
 
 const fs = require('fs');
+const filename = process.argv[2];
 
-try {
-  const data = fs.readFileSync(process.argv[2], 'utf8');
-  console.log(data);
-} catch (err) {
-  console.error(err);
-}
+fs.readFile(filename, 'utf-8', (error, content) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(content);
+  }
+});
