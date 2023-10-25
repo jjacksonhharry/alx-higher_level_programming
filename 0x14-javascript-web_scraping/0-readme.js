@@ -1,18 +1,11 @@
 #!/usr/bin/node
 # script that reads and prints the content of a file.
+
 const fs = require('fs');
 
-const filePath = process.argv[2];
-
-if (!filePath) {
-  console.log('Usage: node 0-readme.js <file_path>');
-  process.exit(1);
+try {
+  const data = fs.readFileSync(process.argv[2], 'utf8');
+  console.log(data);
+} catch (err) {
+  console.error(err);
 }
-
-fs.readFile(filePath, 'utf-8', (err, data) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log(data);
-  }
-});
